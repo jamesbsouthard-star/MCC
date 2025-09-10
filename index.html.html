@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Button</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: Arial, sans-serif;
+        }
+
+        .button {
+            padding: 20px 40px;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            transform: scale(1);
+        }
+
+        .button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .button:active {
+            transform: scale(0.95);
+        }
+
+        .message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+            z-index: 10;
+        }
+
+        .message.show {
+            opacity: 1;
+            animation: bounce 0.6s ease;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 60%, 100% {
+                transform: translate(-50%, -50%) translateY(0);
+            }
+            40% {
+                transform: translate(-50%, -50%) translateY(-30px);
+            }
+            80% {
+                transform: translate(-50%, -50%) translateY(-15px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .button {
+                font-size: 18px;
+                padding: 15px 30px;
+            }
+            
+            .message {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="button" onclick="showMessage()">Click Me!</button>
+    <div class="message" id="message">Fug a Dug</div>
+
+    <script>
+        function showMessage() {
+            const message = document.getElementById('message');
+            const button = document.querySelector('.button');
+            
+            // Hide button temporarily
+            button.style.opacity = '0';
+            
+            // Show message
+            message.classList.add('show');
+            
+            // Hide message and show button again after 2 seconds
+            setTimeout(() => {
+                message.classList.remove('show');
+                button.style.opacity = '1';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
